@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Folder\shell\Clean]
+@="Clean Folder..."
+"Icon"="\"C:\\Program Files (x86)\\DevTools\\CleanFolders\\CleanFolders.exe\""
+"MultiSelectModel"="Single"
+"OnlyInBrowserWindow"=""
+"Position"="Bottom"
+
+[HKEY_CLASSES_ROOT\Folder\shell\Clean\command]
+@="\"C:\\Program Files (x86)\\DevTools\\CleanFolders\\CleanFolders.exe\" \"%1\""
+

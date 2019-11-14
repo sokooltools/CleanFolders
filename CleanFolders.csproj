@@ -128,14 +128,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Resources\Open.png" />
     <None Include="Resources\Delete.png" />
     <None Include="Resources\Close.ico" />
     <Content Include="App.ico" />
+    <Content Include="Images\image1.png" />
+    <Content Include="Images\image2.png" />
     <Content Include="Resources\File.ico" />
     <Content Include="Resources\Folder.ico" />
     <None Include="Resources\Log.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

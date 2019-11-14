@@ -1027,7 +1027,6 @@ namespace SokoolTools.CleanFolders
 		}
 
 		#endregion
-
 	}
 
 	public class LogData

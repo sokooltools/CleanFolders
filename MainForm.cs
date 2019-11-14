@@ -49,6 +49,13 @@ namespace SokoolTools.CleanFolders
 
 			if (args.Count > 0)
 				txtFolderPath.Text = args[0];
+			else
+			{
+				string path = Directory.GetCurrentDirectory();
+				if (path.EndsWith("bin"))
+					path = Path.GetDirectoryName(path);
+				txtFolderPath.Text = path;
+			}
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
@@ -241,8 +248,8 @@ namespace SokoolTools.CleanFolders
 		//----------------------------------------------------------------------------------------------------
 		private void ChkFilesAndOrFolders_CheckedStateChanged(object sender, EventArgs e)
 		{
-            if (!(sender is CheckBox cbx) || !cbx.Focused) return;
-            ReloadTree();
+			if (!(sender is CheckBox cbx) || !cbx.Focused) return;
+			ReloadTree();
 			cbx.ThreeState = false;
 		}
 
@@ -390,7 +397,7 @@ namespace SokoolTools.CleanFolders
 			if (sender == mnuDelete)
 			{
 				string msg =
-					$"Are you sure you want to delete the selected {(treeView1.SelectedNode.ImageIndex == (int) FileType.Folder ? "folder" : "file")}?";
+					$"Are you sure you want to delete the selected {(treeView1.SelectedNode.ImageIndex == (int)FileType.Folder ? "folder" : "file")}?";
 				if (MessageDialog.Show(this, msg, Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) != DialogResult.OK)
 					return;
 
@@ -876,47 +883,47 @@ namespace SokoolTools.CleanFolders
 			switch (imageIndex)
 			{
 				case (int)FileType.Folder:
+				{
+					try
 					{
-						try
+						if (chkSendToRecycleBin.Checked)
 						{
-							if (chkSendToRecycleBin.Checked)
-							{
-								int filesToBeDeleted = GetChildNodeCount(tn.Nodes);
-								FileSystem.DeleteDirectory(fullPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin, UICancelOption.ThrowException);
-								_iFilesDeleted += filesToBeDeleted;
-							}
-							else
-								Directory.Delete(fullPath);
-							LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "Folder", FullPath = fullPath, Status = DELETED });
-							_iFoldersDeleted++;
+							int filesToBeDeleted = GetChildNodeCount(tn.Nodes);
+							FileSystem.DeleteDirectory(fullPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin, UICancelOption.ThrowException);
+							_iFilesDeleted += filesToBeDeleted;
 						}
-						catch (Exception ex)
-						{
-							LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "Folder", FullPath = fullPath, Status = COULD_NOT_DELETE });
-							if (ex is OperationCanceledException)
-								throw;
-						}
+						else
+							Directory.Delete(fullPath);
+						LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "Folder", FullPath = fullPath, Status = DELETED });
+						_iFoldersDeleted++;
 					}
-					break;
+					catch (Exception ex)
+					{
+						LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "Folder", FullPath = fullPath, Status = COULD_NOT_DELETE });
+						if (ex is OperationCanceledException)
+							throw;
+					}
+				}
+				break;
 				case (int)FileType.File:
+				{
+					try
 					{
-						try
-						{
-							if (chkSendToRecycleBin.Checked)
-								FileSystem.DeleteFile(fullPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin, UICancelOption.ThrowException);
-							else
-								File.Delete(fullPath);
-							LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "File", FullPath = fullPath, Status = DELETED });
-							_iFilesDeleted++;
-						}
-						catch (Exception ex)
-						{
-							LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "File", FullPath = fullPath, Status = COULD_NOT_DELETE });
-							if (ex is OperationCanceledException)
-								throw;
-						}
+						if (chkSendToRecycleBin.Checked)
+							FileSystem.DeleteFile(fullPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin, UICancelOption.ThrowException);
+						else
+							File.Delete(fullPath);
+						LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "File", FullPath = fullPath, Status = DELETED });
+						_iFilesDeleted++;
 					}
-					break;
+					catch (Exception ex)
+					{
+						LogFile.Add(new LogData { TimeStamp = timeStamp, Type = "File", FullPath = fullPath, Status = COULD_NOT_DELETE });
+						if (ex is OperationCanceledException)
+							throw;
+					}
+				}
+				break;
 			}
 		}
 

@@ -117,6 +117,7 @@
     <Content Include="CleanFolders.reg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="PostBuild.bat" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,6 +136,7 @@
     <Content Include="App.ico" />
     <Content Include="Images\image1.png" />
     <Content Include="Images\image2.png" />
+    <Content Include="license.txt" />
     <Content Include="Resources\File.ico" />
     <Content Include="Resources\Folder.ico" />
     <None Include="Resources\Log.png" />
@@ -146,7 +148,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>"%25DOCUMENTS%25\Visual Studio 2015\DevTools\Postbuild.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(ProjectName)" "$(TargetDir)" "$(TargetName)"</PostBuildEvent>
+    <PostBuildEvent>"$(ProjectDir)Postbuild.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(ProjectName)" "$(TargetDir)" "$(TargetName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 			 Other similar extension points exist, see Microsoft.Common.targets.

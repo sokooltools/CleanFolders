@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SokoolTools")]
 [assembly: AssemblyProduct("CleanFolders")]
-[assembly: AssemblyCopyright("Copyright ©2012-2017 SokoolTools")]
+[assembly: AssemblyCopyright("Copyright ©2012-2019 SokoolTools")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -492,7 +492,7 @@ namespace SokoolTools.CleanFolders
 			this.btnCollapseAll.Size = new System.Drawing.Size(17, 17);
 			this.btnCollapseAll.TabIndex = 8;
 			this.btnCollapseAll.UseVisualStyleBackColor = false;
-			this.btnCollapseAll.Click += new System.EventHandler(this.btnCollapseAll_Click);
+			this.btnCollapseAll.Click += new System.EventHandler(this.BtnCollapseAll_Click);
 			// 
 			// btnExpandAll
 			// 
@@ -504,7 +504,7 @@ namespace SokoolTools.CleanFolders
 			this.btnExpandAll.TabIndex = 8;
 			this.toolTip1.SetToolTip(this.btnExpandAll, "Expand All");
 			this.btnExpandAll.UseVisualStyleBackColor = false;
-			this.btnExpandAll.Click += new System.EventHandler(this.btnExpandAll_Click);
+			this.btnExpandAll.Click += new System.EventHandler(this.BtnExpandAll_Click);
 			// 
 			// txtFolderPath
 			// 

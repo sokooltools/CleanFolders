@@ -48,8 +48,8 @@ namespace SokoolTools.CleanFolders
 		public EllipsisTextBox()  // : base()
 		{
 			AllowDrop = true;
-			_fullText = string.Empty;
-			base.Text = string.Empty;
+			_fullText = String.Empty;
+			base.Text = String.Empty;
 			base.TextChanged += EllipsisTextBox_TextChanged;
 			Enter += EllipsisTextBox_Enter;
 			Leave += EllipsisTextBox_Leave;

@@ -77,18 +77,18 @@ namespace SokoolTools.CleanFolders
 			treeView1.MouseDoubleClick += TreeView1_MouseDoubleClick;
 
 			btnDelete.Click += BtnDelete_Click;
-			btnClose.Click += btnCancel_Click;
-			btnBrowse.Click += btnBrowse_Click;
-			btnLog.Click += btnLog_Click;
+			btnClose.Click += BtnCancel_Click;
+			btnBrowse.Click += BtnBrowse_Click;
+			btnLog.Click += BtnLog_Click;
 
 			contextMenuStrip1.Opening += ContextMenu_Opening;
-			mnuDelete.Click += contextMenu_Click;
-			mnuExpandAll.Click += contextMenu_Click;
-			mnuCollapseAll.Click += contextMenu_Click;
-			mnuUncheckAll.Click += contextMenu_Click;
-			mnuOptions.Click += contextMenu_Click;
-			mnuAbout.Click += contextMenu_Click;
-			mnuProperties.Click += contextMenu_Click;
+			mnuDelete.Click += ContextMenu_Click;
+			mnuExpandAll.Click += ContextMenu_Click;
+			mnuCollapseAll.Click += ContextMenu_Click;
+			mnuUncheckAll.Click += ContextMenu_Click;
+			mnuOptions.Click += ContextMenu_Click;
+			mnuAbout.Click += ContextMenu_Click;
+			mnuProperties.Click += ContextMenu_Click;
 
 			txtFolderPath.TextChanged += TxtFilePath_TextChanged;
 			txtMscFiles.TextChanged += TxtMscFiles_TextChanged;
@@ -173,7 +173,7 @@ namespace SokoolTools.CleanFolders
 		private void Folder_DragDrop(object sender, DragEventArgs e)
 		{
 			Activate();
-			var folders = (string[])e.Data.GetData(DataFormats.FileDrop);
+			string[] folders = (string[])e.Data.GetData(DataFormats.FileDrop);
 			txtFolderPath.Text = folders[0];
 			treeView1.Focus();
 		}
@@ -187,7 +187,7 @@ namespace SokoolTools.CleanFolders
 		{
 			Cursor = Cursors.WaitCursor;
 			_topNode = null;
-			if (!string.IsNullOrEmpty(txtFolderPath.Text))
+			if (!String.IsNullOrEmpty(txtFolderPath.Text))
 				backgroundWorker1.RunWorkerAsync(txtFolderPath.Text);
 		}
 
@@ -232,7 +232,7 @@ namespace SokoolTools.CleanFolders
 			UpdateStatusBar();
 
 			if (!isValidPath)
-				txtFolderPath.Text = string.Empty;
+				txtFolderPath.Text = String.Empty;
 			else
 				fileSystemWatcher1.Path = txtFolderPath.Text;
 
@@ -255,7 +255,7 @@ namespace SokoolTools.CleanFolders
 
 		private void TxtMscFiles_TextChanged(object sender, EventArgs e)
 		{
-			bool isNullOrEmpty = string.IsNullOrEmpty(txtMscFiles.Text);
+			bool isNullOrEmpty = String.IsNullOrEmpty(txtMscFiles.Text);
 			if (txtMscFiles.Focused)
 			{
 				timer1.Stop();
@@ -267,7 +267,7 @@ namespace SokoolTools.CleanFolders
 
 		private void TxtMscFolders_TextChanged(object sender, EventArgs e)
 		{
-			bool isNullOrEmpty = string.IsNullOrEmpty(txtMscFolders.Text);
+			bool isNullOrEmpty = String.IsNullOrEmpty(txtMscFolders.Text);
 			if (txtMscFolders.Focused)
 			{
 				timer1.Stop();
@@ -281,7 +281,7 @@ namespace SokoolTools.CleanFolders
 		{
 			int totalFilesToDelete = _totalFilesCheckmarked + _totalFoldersCheckmarked;
 
-			string permanently = chkSendToRecycleBin.Checked ? string.Empty : " permanently";
+			string permanently = chkSendToRecycleBin.Checked ? String.Empty : " permanently";
 			string text = totalFilesToDelete == 1
 							? $"Are you sure you want to{permanently} delete the selected file or folder?"
 							: $"Are you sure you want to{permanently} delete the {totalFilesToDelete} selected files and/or folders?";
@@ -392,7 +392,7 @@ namespace SokoolTools.CleanFolders
 			mnuProperties.Enabled = isEnabled;
 		}
 
-		private void contextMenu_Click(object sender, EventArgs e)
+		private void ContextMenu_Click(object sender, EventArgs e)
 		{
 			if (sender == mnuDelete)
 			{
@@ -453,7 +453,7 @@ namespace SokoolTools.CleanFolders
 			}
 		}
 
-		private void btnBrowse_Click(object sender, EventArgs e)
+		private void BtnBrowse_Click(object sender, EventArgs e)
 		{
 			using (var dlg = new FolderBrowserDialog())
 			{
@@ -465,7 +465,7 @@ namespace SokoolTools.CleanFolders
 			}
 		}
 
-		private void btnLog_Click(object sender, EventArgs e)
+		private void BtnLog_Click(object sender, EventArgs e)
 		{
 			using (var dlg = new LogFileViewer())
 			{
@@ -475,17 +475,17 @@ namespace SokoolTools.CleanFolders
 			}
 		}
 
-		private void btnCancel_Click(object sender, EventArgs e)
+		private void BtnCancel_Click(object sender, EventArgs e)
 		{
 			Close();
 		}
 
-		private void btnExpandAll_Click(object sender, EventArgs e)
+		private void BtnExpandAll_Click(object sender, EventArgs e)
 		{
 			treeView1.ExpandAll();
 		}
 
-		private void btnCollapseAll_Click(object sender, EventArgs e)
+		private void BtnCollapseAll_Click(object sender, EventArgs e)
 		{
 			treeView1.CollapseAll();
 		}
@@ -1030,7 +1030,7 @@ namespace SokoolTools.CleanFolders
 			else if (sizeInBytes < 1ul << 50) { d = sizeInBytes / (double)(1ul << 40); suffix = "TB"; } // terabyte
 			else if (sizeInBytes < 1ul << 60) { d = sizeInBytes / (double)(1ul << 50); suffix = "PB"; } // petabyte
 			else { d = sizeInBytes / (double)(1ul << 60); suffix = "EB"; }                                // exabyte
-			return string.Format($"{{0:F{decimalPlaces}}} {suffix}", d);
+			return String.Format($"{{0:F{decimalPlaces}}} {suffix}", d);
 		}
 
 		#endregion

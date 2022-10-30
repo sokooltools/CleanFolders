@@ -10,23 +10,25 @@ namespace SokoolTools.CleanFolders
 			InitializeComponent();
 		}
 
+		//----------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Gets or sets the log data.
 		/// </summary>
-		/// <value>
-		/// The log data.
-		/// </value>
+		/// <value>The log data.</value>
+		//----------------------------------------------------------------------------------------------------
 		public object LogData
 		{
 			get => dataGridView1.DataSource;
-            set => dataGridView1.DataSource = value;
-        }
+			set => dataGridView1.DataSource = value;
+		}
 
+		//----------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Handles the Load event of the LogFileViewer control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+		//----------------------------------------------------------------------------------------------------
 		private void LogFileViewer_Load(object sender, EventArgs e)
 		{
 			dataGridView1.AutoResizeColumns();

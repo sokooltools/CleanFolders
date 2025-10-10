@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using SokoolTools.CleanFolders.Properties;
+// ReSharper disable SwitchStatementMissingSomeEnumCasesNoDefault
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace SokoolTools.CleanFolders
 {
@@ -75,7 +77,7 @@ namespace SokoolTools.CleanFolders
 
         //------------------------------------------------------------------------------------------------------------------------
         /// <summary>
-        /// Gets or sets the width of all of the buttons. Only applies if <see cref="AutoSizeButtons"/> is set to true.
+        /// Gets or sets the width of all buttons. Only applies if <see cref="AutoSizeButtons"/> is set to true.
         /// <remarks>
         /// Default value is 73.
         /// </remarks>
@@ -101,19 +103,6 @@ namespace SokoolTools.CleanFolders
         //------------------------------------------------------------------------------------------------------------------------
         public static int Show(string text, string caption, MessageBoxIcon icon, params string[] buttons)
         {
-            //int i;
-            //MessageDialog md = null;
-            //try
-            //{
-            //    md = new MessageDialog();
-            //    i = md.ShowForm(text, caption, icon, buttons);
-            //}
-            //finally
-            //{
-            //    if (md != null) md.Dispose();
-            //}
-            //return i;
-
             using (var dlg = new MessageDialog())
             {
                 return dlg.ShowForm(text, caption, icon, buttons);
@@ -359,21 +348,22 @@ namespace SokoolTools.CleanFolders
             parent.TopMost = false;
             try
             {
-                int buttonOrdinal = Show(text,
-                                                 caption,
-                                                 MessageBoxIcon.Question,
-                                                 Resources.MessageBoxButton_Save,
-                                                 Resources.MessageBoxButton_DontSave,
-                                                 Resources.MessageBoxButton_Cancel);
+                int buttonOrdinal = Show(
+					text,
+					caption,
+					MessageBoxIcon.Question,
+					Resources.MessageBoxButton_Save,
+					Resources.MessageBoxButton_DontSave,
+					Resources.MessageBoxButton_Cancel);
                 switch (buttonOrdinal)
                 {
                     case 0: // 'Save' button clicked.
                         return DialogResult.Yes;
                     case 1: // 'Don't Save' button clicked.
                         return DialogResult.No;
-                    case 2: // 'Cancel' button clicked.
-                    case 3: // 'Close' button clicked.
-                        return DialogResult.Cancel;
+                    //case 2: // 'Cancel' button clicked.
+                    //case 3: // 'Close' button clicked.
+                    //    return DialogResult.Cancel;
                 }
                 return DialogResult.Cancel;
             }
@@ -400,7 +390,7 @@ namespace SokoolTools.CleanFolders
             parent.TopMost = false;
             try
             {
-                switch (buttons)
+				switch (buttons)
                 {
                     case MessageBoxButtons.OK:
                         {

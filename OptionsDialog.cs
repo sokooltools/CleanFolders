@@ -17,7 +17,7 @@ namespace SokoolTools.CleanFolders
 
 		private void chkShowExplorerContextMenu_CheckedChanged(object sender, EventArgs e)
 		{
-			CheckBox cbx = (CheckBox)sender;
+			var cbx = (CheckBox)sender;
 			if (cbx.Focused)
 				btnOK.Enabled = !(ContextMenuExists && cbx.Checked);
 		}
@@ -49,18 +49,17 @@ namespace SokoolTools.CleanFolders
 
 		private static void AddContextMenu()
 		{
-			using (RegistryKey newkey = Registry.ClassesRoot.CreateSubKey(HIVE))
+			using (RegistryKey newKey = Registry.ClassesRoot.CreateSubKey(HIVE))
 			{
-				if (newkey == null) return;
-				newkey.SetValue("", "Clean Folder...");
-				newkey.SetValue("Icon", AssemblyLocation);
-				newkey.SetValue("MultiSelectModel", "Single");
-				newkey.SetValue("OnlyInBrowserWindow", "");
-				newkey.SetValue("Position", "Bottom");
-				using (RegistryKey subkey = newkey.CreateSubKey("command"))
+				if (newKey == null) return;
+				newKey.SetValue("", "Clean Folder...");
+				newKey.SetValue("Icon", AssemblyLocation);
+				newKey.SetValue("MultiSelectModel", "Single");
+				newKey.SetValue("OnlyInBrowserWindow", "");
+				newKey.SetValue("Position", "Bottom");
+				using (RegistryKey subkey = newKey.CreateSubKey("command"))
 				{
-					if (subkey != null)
-						subkey.SetValue("", "\"" + AssemblyLocation + "\" \"%1\"");
+					subkey?.SetValue("", "\"" + AssemblyLocation + "\" \"%1\"");
 				}
 			}
 		}
@@ -76,10 +75,7 @@ namespace SokoolTools.CleanFolders
 		/// </summary>
 		/// <returns></returns>
 		//------------------------------------------------------------------------------------------
-		internal static string AssemblyLocation
-		{
-			get { return string.Format(@"{0}\{1}.exe", Environment.CurrentDirectory, Assembly.GetExecutingAssembly().GetName().Name); }
-		}
-
+		internal static string AssemblyLocation =>
+			$@"{Environment.CurrentDirectory}\{Assembly.GetExecutingAssembly().GetName().Name}.exe";
 	}
 }
